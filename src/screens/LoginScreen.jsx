@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./LoginScreen.css";
+import SignupScreen from './SignupScreen'
 
 export default function LoginScreen() {
+  const [signIn, setSignIn] = useState(false);
+
   return (
     <div className="loginScreen">
       <div className="loginScreen__background">
@@ -10,10 +13,15 @@ export default function LoginScreen() {
           src="https://logos-world.net/wp-content/uploads/2020/04/Netflix-Logo.png"
           alt=""
         />
-        <button className="loginScreen__button">Sign In</button>
+        <button onClick={() => setSignIn(true)} className="loginScreen__button">
+          Sign In
+        </button>
         <div className="loginScreen__gradient" />
       </div>
       <div className="loginScreen__body">
+        {signIn ? (
+            <SignupScreen/>
+        ): ( 
         <>
           <h1>Unlimited films, TV programmes and more.</h1>
           <h2>Watch anywhere. Cancel at any time.</h2>
@@ -24,10 +32,16 @@ export default function LoginScreen() {
           <div className="loginScreen__input">
             <form>
               <input type="email" placeholder="Email Adress" />
-              <button className="loginScreen__getStarted">GET STARTED</button>
+              <button
+                onClick={() => setSignIn(true)}
+                className="loginScreen__getStarted"
+              >
+                GET STARTED
+              </button>
             </form>
           </div>
         </>
+        )}
       </div>
     </div>
   );
