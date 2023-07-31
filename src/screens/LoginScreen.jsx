@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./LoginScreen.css";
 import SignupScreen from './SignupScreen'
+import { Link } from "react-router-dom";
 
 export default function LoginScreen() {
   const [signIn, setSignIn] = useState(false);
@@ -8,11 +9,13 @@ export default function LoginScreen() {
   return (
     <div className="loginScreen">
       <div className="loginScreen__background">
+        <Link to="/homescreen">
         <img
           className="loginScreen__logo"
           src="https://logos-world.net/wp-content/uploads/2020/04/Netflix-Logo.png"
           alt=""
-        />
+          />
+          </Link>
         <button onClick={() => setSignIn(true)} className="loginScreen__button">
           Sign In
         </button>
