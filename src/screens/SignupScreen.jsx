@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import "./SignupScreen.css";
 import { accountData } from "../AccountData";
 
-export default function SignupScreen({ setUser }) {
+export default function SignupScreen({ setUser, setSignUp, setSignIn }) {
   const [inputChange, setInputchange] = useState("");
   const [inputChangePass, setInputchangePass] = useState("");
 
   const register = (e) => {
     e.preventDefault();
+    setSignUp(true);
+    setSignIn(false);
   };
   const setInputChangeFunction = (event) => {
     setInputchange(event.target.value);
@@ -52,6 +54,7 @@ export default function SignupScreen({ setUser }) {
         </button>
         <h4>
           <span className="signupScreen__gray">New to Netflix?</span>
+
           <span className="signupScreen__link" onClick={register}>
             Sign Up now.
           </span>

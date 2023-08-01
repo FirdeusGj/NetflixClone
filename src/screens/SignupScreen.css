@@ -20,6 +20,12 @@
     text-align: left;
     margin-bottom: 25px;
 }
+.signupScreen > form > h4{
+    display: flex;
+    padding-top: 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
 .signupScreen > form > button{
     padding: 16px 20px;
     font-size: 1rem;
@@ -32,7 +38,7 @@
     background-color: #e50914;
 }
 .signupScreen__gray{
-    color:gray
+    color:gray;
 }
 .signupScreen__link:hover{
     cursor: pointer;
