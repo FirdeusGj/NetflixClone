@@ -7,7 +7,8 @@ import ProfileScreen from "./screens/ProfileScreen";
 import SignupScreen from "./screens/SignupScreen";
 
 function App() {
-  const [user, setUser] = useState(false)
+  const [user, setUser] = useState(false);
+  const [inputData, getInputData] = useState('');
   return (
     <div className="app">
       <Router>
@@ -15,7 +16,7 @@ function App() {
           <LoginScreen setUser={setUser}/>
         ) : (
           <Routes>
-            <Route path="/profile" element={<ProfileScreen/>}/>
+            <Route path="/profile" element={<ProfileScreen setUser={setUser}/>}/>
             <Route path="/" element={<HomeScreen />} />
           </Routes>
         )}

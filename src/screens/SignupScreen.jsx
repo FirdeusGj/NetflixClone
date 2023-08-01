@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./SignupScreen.css";
+import { accountData } from "../AccountData";
 
-export default function SignupScreen({ setUser, setInputData}) {
+export default function SignupScreen({ setUser }) {
   const [inputChange, setInputchange] = useState("");
   const [inputChangePass, setInputchangePass] = useState("");
 
@@ -17,7 +18,7 @@ export default function SignupScreen({ setUser, setInputData}) {
   const signIn = (e) => {
     e.preventDefault();
     setUser(true)
-    setInputData(inputChange)
+    accountData[0].email = inputChange
   };
   return (
     <div className="signupScreen">

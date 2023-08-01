@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import "./LoginScreen.css";
-import SignupScreen from './SignupScreen'
-import { Link } from "react-router-dom";
+import SignupScreen from './SignupScreen';
 
 export default function LoginScreen( { setUser }) {
   const [signIn, setSignIn] = useState(false);
-  const [inputData, setInputData] = useState('');
-  console.log(inputData)
   return (
     <div className="loginScreen">
       <div className="loginScreen__background">
@@ -22,7 +19,7 @@ export default function LoginScreen( { setUser }) {
       </div>
       <div className="loginScreen__body">
         {signIn ? (
-            <SignupScreen setInputData={setInputData} setUser={setUser}/>
+            <SignupScreen setUser={setUser}/>
         ): (
         <>
           <h1>Unlimited films, TV programmes and more.</h1>

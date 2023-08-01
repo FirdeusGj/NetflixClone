@@ -2,8 +2,13 @@ import React from "react";
 import "./ProfileScreen.css";
 import Nav from "../Nav";
 import PlansScreen from "./PlansScreen";
+import { accountData } from "../AccountData";
 
-export default function ProfileScreen() {
+export default function ProfileScreen({ setUser }) {
+  const signOut = (e) => {
+    e.preventDefault();
+    setUser(false)
+  }
   return (
     <div className="profileScreen">
       <Nav />
@@ -15,11 +20,11 @@ export default function ProfileScreen() {
             alt=""
           />
           <div className="profileScreen__details">
-            <h2>Useremail@gmail.com</h2>
+            <h2>{accountData[0].email}</h2>
             <div className="profileScreen__plans">
               <h3>Plans</h3>
               <PlansScreen/>
-              <button className="profileScreen__signOut">Sign Out</button>
+              <button onClick={signOut} className="profileScreen__signOut">Sign Out</button>
             </div>
           </div>
         </div>
