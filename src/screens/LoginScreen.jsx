@@ -3,19 +3,18 @@ import "./LoginScreen.css";
 import SignupScreen from './SignupScreen'
 import { Link } from "react-router-dom";
 
-export default function LoginScreen() {
+export default function LoginScreen( { setUser }) {
   const [signIn, setSignIn] = useState(false);
-
+  const [inputData, setInputData] = useState('');
+  console.log(inputData)
   return (
     <div className="loginScreen">
       <div className="loginScreen__background">
-        <Link to="/homescreen">
         <img
           className="loginScreen__logo"
           src="https://logos-world.net/wp-content/uploads/2020/04/Netflix-Logo.png"
           alt=""
           />
-          </Link>
         <button onClick={() => setSignIn(true)} className="loginScreen__button">
           Sign In
         </button>
@@ -23,8 +22,8 @@ export default function LoginScreen() {
       </div>
       <div className="loginScreen__body">
         {signIn ? (
-            <SignupScreen/>
-        ): ( 
+            <SignupScreen setInputData={setInputData} setUser={setUser}/>
+        ): (
         <>
           <h1>Unlimited films, TV programmes and more.</h1>
           <h2>Watch anywhere. Cancel at any time.</h2>
@@ -34,7 +33,7 @@ export default function LoginScreen() {
           </h3>
           <div className="loginScreen__input">
             <form>
-              <input type="email" placeholder="Email Adress" />
+              <input type="email" placeholder="Email Adress" required/>
               <button
                 onClick={() => setSignIn(true)}
                 className="loginScreen__getStarted"

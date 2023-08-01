@@ -37,6 +37,7 @@
 .profileScreen__plans > h3{
     border-bottom: 1px solid #282c2d;
     padding-bottom: 10px;
+    padding-top: 10px;
 }
 .profileScreen__signOut{
     padding: 10px 20px;

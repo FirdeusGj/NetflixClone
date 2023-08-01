@@ -1,6 +1,7 @@
 import React from "react";
 import "./ProfileScreen.css";
 import Nav from "../Nav";
+import PlansScreen from "./PlansScreen";
 
 export default function ProfileScreen() {
   return (
@@ -17,6 +18,7 @@ export default function ProfileScreen() {
             <h2>Useremail@gmail.com</h2>
             <div className="profileScreen__plans">
               <h3>Plans</h3>
+              <PlansScreen/>
               <button className="profileScreen__signOut">Sign Out</button>
             </div>
           </div>
