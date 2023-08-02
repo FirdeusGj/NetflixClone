@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import "./SignupScreen.css";
 import { accountData } from "../AccountData";
 
@@ -45,7 +45,7 @@ export default function SignupScreen({ setUser, setSignUp, setSignIn }) {
           onClick={
             inputChange !== "" &&
             inputChangePass !== "" &&
-            inputChange.includes("@")
+            inputChange.includes("@gmail.com")
               ? signIn
               : null
           }

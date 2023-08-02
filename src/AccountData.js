@@ -1,6 +1,1 @@
-export const accountData = [
-    {
-        email: '',
-        password: ''
-    }
-]
+export const accountData = []

@@ -37,7 +37,8 @@
 }
 .loginScreen__body{
     position: absolute;
-    top: 30%;
+    top: 50%;
+    transform: translateY(-50%);
     margin: 0 auto;
     text-align: center;
     z-index: 1;
