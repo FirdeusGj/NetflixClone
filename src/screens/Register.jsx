@@ -5,7 +5,7 @@ export default function Register({
   setUser,
   setSignIn,
   setSignUp,
-  setCurrentAccount,
+  
 }) {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -30,7 +30,6 @@ export default function Register({
       passwordWrong.style.boxShadow = "0 0 3px 2px #ff4545";
       passwordConfirmWrong.style.boxShadow = "0 0 3px 2px #ff4545";
     } else {
-      setCurrentAccount(email);
       setUser(true);
       accountData.push(registerData);
       console.log(accountData);

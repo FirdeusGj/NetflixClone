@@ -6,7 +6,7 @@ export default function SignupScreen({
   setUser,
   setSignUp,
   setSignIn,
-  myCurrentAccount,
+  
 }) {
   const [inputChange, setInputchange] = useState("");
   const [inputChangePass, setInputchangePass] = useState("");
@@ -44,7 +44,6 @@ export default function SignupScreen({
     }
     if (emailFound && passwordFound) {
       setUser(true);
-      myCurrentAccount(inputChange);
     } else {
       alert("invalid password or email");
     }
