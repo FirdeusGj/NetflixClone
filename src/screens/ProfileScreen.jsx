@@ -3,12 +3,14 @@ import "./ProfileScreen.css";
 import Nav from "../Nav";
 import PlansScreen from "./PlansScreen";
 import { accountData } from "../AccountData";
-
+import { profile } from "../ProfileData";
 export default function ProfileScreen({ setUser }) {
   const signOut = (e) => {
     e.preventDefault();
     setUser(false)
   }
+  let email = profile.length - 1
+  let lastMail = profile[email]
   return (
     <div className="profileScreen">
       <Nav />
@@ -20,7 +22,7 @@ export default function ProfileScreen({ setUser }) {
             alt=""
           />
           <div className="profileScreen__details">
-            <h2>{accountData[0][0].email}</h2>
+            <h2>{lastMail}</h2>
             <div className="profileScreen__plans">
               <h3>Plans</h3>
               <PlansScreen/>

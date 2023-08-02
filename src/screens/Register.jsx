@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Register.css";
 import { accountData } from "../AccountData";
+import { profile } from "../ProfileData";
 export default function Register({
   setUser,
   setSignIn,
@@ -30,6 +31,7 @@ export default function Register({
       passwordWrong.style.boxShadow = "0 0 3px 2px #ff4545";
       passwordConfirmWrong.style.boxShadow = "0 0 3px 2px #ff4545";
     } else {
+      profile.push(email)
       setUser(true);
       accountData.push(registerData);
       console.log(accountData);

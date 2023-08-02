@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SignupScreen.css";
 import { accountData } from "../AccountData";
-
+import { profile } from "../ProfileData";
 export default function SignupScreen({
   setUser,
   setSignUp,
@@ -43,6 +43,7 @@ export default function SignupScreen({
       }
     }
     if (emailFound && passwordFound) {
+      profile.push(inputChange)
       setUser(true);
     } else {
       alert("invalid password or email");
