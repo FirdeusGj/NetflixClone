@@ -7,14 +7,15 @@ import ProfileScreen from "./screens/ProfileScreen";
 
 function App() {
   const [user, setUser] = useState(false);
+  const [currentAccount, setCurrentAccount] = useState('')
   return (
     <div className="app">
       <Router>
         {!user ? (
-          <LoginScreen setUser={setUser}/>
+          <LoginScreen myCurrentAccount={setCurrentAccount} setUser={setUser}/>
         ) : (
           <Routes>
-            <Route path="/profile" element={<ProfileScreen setUser={setUser}/>}/>
+            <Route path="/profile" element={<ProfileScreen currentAccount={setCurrentAccount} setUser={setUser}/>}/>
             <Route path="/" element={<HomeScreen />} />
           </Routes>
         )}

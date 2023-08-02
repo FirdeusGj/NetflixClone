@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import "./Register.css";
 import { accountData } from "../AccountData";
-export default function Register({ setUser, setSignIn, setSignUp }) {
+export default function Register({
+  setUser,
+  setSignIn,
+  setSignUp,
+  setCurrentAccount,
+}) {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,18 +21,19 @@ export default function Register({ setUser, setSignIn, setSignUp }) {
       lastName: lastName,
       email: email,
       password: password,
-      confirmPassword: confirmPassword
-    }
-  ]
+      confirmPassword: confirmPassword,
+    },
+  ];
   const registerForm = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       passwordWrong.style.boxShadow = "0 0 3px 2px #ff4545";
       passwordConfirmWrong.style.boxShadow = "0 0 3px 2px #ff4545";
     } else {
+      setCurrentAccount(email);
       setUser(true);
-      accountData.push(registerData)
-      console.log(accountData)
+      accountData.push(registerData);
+      console.log(accountData);
     }
   };
   const alreadyHave = () => {
@@ -99,7 +105,7 @@ export default function Register({ setUser, setSignIn, setSignUp }) {
               : null
           }
         >
-          Sign In
+          Sign Up
         </button>
         <h4>
           <span className="registerScreen__gray">Already Have an accout?</span>

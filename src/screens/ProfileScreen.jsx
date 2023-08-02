@@ -4,11 +4,12 @@ import Nav from "../Nav";
 import PlansScreen from "./PlansScreen";
 import { accountData } from "../AccountData";
 
-export default function ProfileScreen({ setUser }) {
+export default function ProfileScreen({ setUser, currentAccount }) {
   const signOut = (e) => {
     e.preventDefault();
     setUser(false)
   }
+  console.log(currentAccount)
   return (
     <div className="profileScreen">
       <Nav />
@@ -20,7 +21,7 @@ export default function ProfileScreen({ setUser }) {
             alt=""
           />
           <div className="profileScreen__details">
-            <h2>{accountData[0].email}</h2>
+            <h2>{accountData[0][0].email}</h2>
             <div className="profileScreen__plans">
               <h3>Plans</h3>
               <PlansScreen/>

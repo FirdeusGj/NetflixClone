@@ -3,10 +3,10 @@ import "./LoginScreen.css";
 import SignupScreen from "./SignupScreen";
 import Register from "./Register";
 
-export default function LoginScreen({ setUser }) {
+export default function LoginScreen({ setUser, myCurrentAccount }) {
   const [signIn, setSignIn] = useState(false);
   const [signUp, setSignUp] = useState(false);
-
+  const [currentAccount, setCurrentAccount] = useState('');
   const homeScreen = () => {
     setSignIn(false)
     setSignUp(false)
@@ -29,7 +29,7 @@ export default function LoginScreen({ setUser }) {
       <div className="loginScreen__body">
         {signIn ? (
           <SignupScreen setUser={setUser} setSignIn={setSignIn} setSignUp={setSignUp} />
-        ) : signUp ? <Register setUser={setUser} setSignIn={setSignIn} setSignUp={setSignUp}/> : (
+        ) : signUp ? <Register setCurrentAccount={setCurrentAccount} setUser={setUser} setSignIn={setSignIn} setSignUp={setSignUp}/> : (
           <>
             <h1>Unlimited films, TV programmes and more.</h1>
             <h2>Watch anywhere. Cancel at any time.</h2>
