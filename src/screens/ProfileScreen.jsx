@@ -2,15 +2,17 @@ import React from "react";
 import "./ProfileScreen.css";
 import Nav from "../Nav";
 import PlansScreen from "./PlansScreen";
-import { accountData } from "../AccountData";
 import { profile } from "../ProfileData";
+import { Link, useNavigate } from "react-router-dom";
 export default function ProfileScreen({ setUser }) {
+  const navigate = useNavigate();
   const signOut = (e) => {
     e.preventDefault();
-    setUser(false)
-  }
-  let email = profile.length - 1
-  let lastMail = profile[email]
+    navigate("/");
+    setUser(false);
+  };
+  let email = profile.length - 1;
+  let lastMail = profile[email];
   return (
     <div className="profileScreen">
       <Nav />
@@ -25,8 +27,12 @@ export default function ProfileScreen({ setUser }) {
             <h2>{lastMail}</h2>
             <div className="profileScreen__plans">
               <h3>Plans</h3>
-              <PlansScreen/>
-              <button onClick={signOut} className="profileScreen__signOut">Sign Out</button>
+              <PlansScreen />
+              <Link to="/">
+                <button onClick={signOut} className="profileScreen__signOut">
+                  Sign Out
+                </button>
+              </Link>
             </div>
           </div>
         </div>

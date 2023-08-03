@@ -44,3 +44,8 @@
     cursor: pointer;
     text-decoration: underline;
 }
+@media (max-width:500px) {
+    .signupScreen{
+        padding: 30px;
+    }
+}

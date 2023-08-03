@@ -78,3 +78,14 @@
 .loginScreen__input{
     margin: 20px;
 }
+@media (max-width: 500px) {
+    .loginScreen__body > h1{
+        font-size: 2.2rem;
+    }
+    .loginScreen__body > h2{
+        font-size: 1.3rem;
+    }
+    .loginScreen__body > h3{
+        font-size: 1rem;
+    }
+}

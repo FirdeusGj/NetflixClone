@@ -14,7 +14,6 @@ export default function SignupScreen({
   const fetchedEmails = emails.map((elem) => elem.email);
   const passwords = accountData.map((elem) => elem[0]);
   const fetchedPasswords = passwords.map((elem) => elem.password)
-  console.log(accountData);
   let emailFound = false;
   let passwordFound = false;
   const register = (e) => {

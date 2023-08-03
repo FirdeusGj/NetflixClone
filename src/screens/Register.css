@@ -60,3 +60,8 @@
     cursor: pointer;
     text-decoration: underline;
 }
+@media (max-width: 500px) {
+    .registerScreen{
+        padding: 30px;
+    }
+}

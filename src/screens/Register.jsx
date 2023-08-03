@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import "./Register.css";
 import { accountData } from "../AccountData";
 import { profile } from "../ProfileData";
-export default function Register({
-  setUser,
-  setSignIn,
-  setSignUp,
-  
-}) {
+export default function Register({ setUser, setSignIn, setSignUp }) {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,6 +10,10 @@ export default function Register({
   const [confirmPassword, setConfirmPassword] = useState("");
   const passwordWrong = document.querySelector(".registerPass");
   const passwordConfirmWrong = document.querySelector(".registerPassConfirm");
+  const registeredAccounts = accountData
+    .map((elem) => elem[0])
+    .map((elem) => elem.email);
+  let exists = false;
   const registerData = [
     {
       id: accountData.length,
@@ -27,14 +26,21 @@ export default function Register({
   ];
   const registerForm = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
+    for (let i = 0; i < registeredAccounts.length; i++) {
+      if (registeredAccounts[i] === email) {
+        exists = true;
+        break;
+      }
+    }
+    if (exists) {
+      alert("Email is already in use!");
+    } else if (password !== confirmPassword) {
       passwordWrong.style.boxShadow = "0 0 3px 2px #ff4545";
       passwordConfirmWrong.style.boxShadow = "0 0 3px 2px #ff4545";
     } else {
-      profile.push(email)
+      profile.push(email);
       setUser(true);
       accountData.push(registerData);
-      console.log(accountData);
     }
   };
   const alreadyHave = () => {
@@ -110,7 +116,6 @@ export default function Register({
         </button>
         <h4>
           <span className="registerScreen__gray">Already Have an accout?</span>
-
           <span className="registerScreen__link" onClick={alreadyHave}>
             Sign In now.
           </span>

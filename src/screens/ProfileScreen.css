@@ -50,3 +50,29 @@
     border: none;
     cursor: pointer
 }
+@media (max-width:700px) {
+    .profileScreen__info > img{
+        height: 50px;
+    }
+    .profileScreen__details > h2{
+        padding: 10px;
+        font-size: 15px;
+        padding-left: 10px;
+    }
+    .profileScreen__body{
+        width: 70%;
+        padding-top:20%;
+    }
+    .profileScreen__body > h1{
+        font-size: 30px;
+    }
+    .plansScreen__plan{
+        padding: 20px 0 !important;
+    }
+}
+@media (max-width: 500px) {
+    .profileScreen__body{
+        width: 90%;
+        padding-top: 30%;
+    }
+}

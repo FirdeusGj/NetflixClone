@@ -3,8 +3,8 @@ import "./PlansScreen.css";
 import { plansData } from "../PlansData";
 
 export default function PlansScreen() {
-  const loadCheckout = async (id) => {
-    console.log(id);
+  const loadCheckout = async () => {
+    alert(`Haven't got around to doing this :(`)
   };
   return (
     <>
@@ -15,7 +15,7 @@ export default function PlansScreen() {
               <h5>{elem.planName}</h5>
               <h6>{elem.planDescription}</h6>
             </div>
-            <button onClick={() => loadCheckout(elem.id)}>Subscribe</button>
+            <button onClick={() => loadCheckout()}>Subscribe</button>
           </div>
         </>
       ))}

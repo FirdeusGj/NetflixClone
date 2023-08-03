@@ -20,7 +20,6 @@
     padding-top: 1rem;
     font-size: 0.8rem;
     max-width: 360px;
-    height: 80px;
 }
 .banner--fadeBottom{
     height: 7.4rem;
@@ -44,4 +43,12 @@
     color: #000;
     background-color: #e6e6e6;
     transition: all 0.2s;
+}
+@media (max-width:400px) {
+    .banner__description{
+        width: 100%;
+    }
+    .banner__title{
+        font-size: 2rem;
+    }
 }

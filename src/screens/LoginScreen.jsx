@@ -38,7 +38,6 @@ export default function LoginScreen({ setUser }) {
             </h3>
             <div className="loginScreen__input">
               <form>
-                <input type="email" placeholder="Email Adress" required />
                 <button onClick={() => setSignUp(true)} className="loginScreen__getStarted">GET STARTED</button>
               </form>
             </div>
