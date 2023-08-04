@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Banner.css";
 import axios from "./axios";
 import requests from "./Request";
+import { Link } from "react-router-dom";
 
 export default function Banner() {
   const [movie, setMovie] = useState([]);
@@ -24,6 +25,9 @@ export default function Banner() {
   const playButton = () => {
     alert('cannot proceed further!')
   }
+  const viewMovies = () => {
+    console.log('works')
+  }
   return (
     <header
       className="banner"
@@ -40,8 +44,14 @@ export default function Banner() {
           <button className="banner__button">My List</button>
         </div>
         <h1 className="banner__description">
-          {movie.overview}
+          {truncate(movie?.overview ,200
+          )}
         </h1>
+        <Link to='/search'>
+        <button className="banner__viewButton" onClick={viewMovies}>
+          View more movies
+        </button>
+        </Link>
       </div>
       <div className="banner--fadeBottom" />
     </header>
