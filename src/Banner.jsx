@@ -25,9 +25,6 @@ export default function Banner() {
   const playButton = () => {
     alert('cannot proceed further!')
   }
-  const viewMovies = () => {
-    console.log('works')
-  }
   return (
     <header
       className="banner"
@@ -48,7 +45,7 @@ export default function Banner() {
           )}
         </h1>
         <Link to='/search'>
-        <button className="banner__viewButton" onClick={viewMovies}>
+        <button className="banner__viewButton">
           View more movies
         </button>
         </Link>

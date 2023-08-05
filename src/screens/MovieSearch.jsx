@@ -11,23 +11,27 @@ export default function MovieSearch() {
   const [loading, setLoading] = useState(false);
   const [searchMovie, setSearchMovie] = useState("");
   const [moviesAvailable, setMoviesAvailable] = useState(true);
-  let fetchedMovies = []
+  let fetchedMovies = [];
   async function FetchMovies(query) {
     setLoading(true);
-    for(let i = 0; i <= 6; i++){
-      const { data } = await axios.get(`https://www.omdbapi.com/?apikey=59e995b1&s=${searchMovie || query}&page=${i}`).catch((error) => console.log(error));
+      const { data } = await axios
+        .get(
+          `https://www.omdbapi.com/?apikey=59e995b1&s=${
+            searchMovie || query
+          }&page=1`
+        )
+        .catch((error) => console.log(error));
       if (data.Search) {
         const filteredMovies = data.Search.filter(
           (movie) => movie.Type !== "game" && movie.Poster !== "N/A"
-          );
-          fetchedMovies.push(...filteredMovies)
-          console.log(fetchedMovies)
-          setMovies(fetchedMovies);
-          setMoviesAvailable(true);
-        } else {
-          setMoviesAvailable(false);
-          setMovies([]);
-        }
+        );
+        fetchedMovies.push(...filteredMovies);
+        console.log(fetchedMovies)
+        setMovies(fetchedMovies);
+        setMoviesAvailable(true);
+      } else {
+        setMoviesAvailable(false);
+        setMovies([]);
       }
     setLoading(false);
   }
@@ -47,19 +51,20 @@ export default function MovieSearch() {
     <>
       <Nav />
       <section className="movieSearch">
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
-        <h1>test</h1>
         <div className="search__input">
-          <input
-            type="text"
-            value={searchMovie}
-            placeholder="Movie Name"
-            onChange={(event) => setSearchMovie(event.target.value)}
-            onKeyUp={searchEnter}
-          />
-          <button onClick={() => FetchMovies(searchMovie)}>Search</button>
+          <div className="search__input--wrapper">
+            <label>Netflix Search</label>
+            <div className="search__form">
+              <input
+                type="text"
+                value={searchMovie}
+                placeholder="Movie Name"
+                onChange={(event) => setSearchMovie(event.target.value)}
+                onKeyUp={searchEnter}
+              />
+              <button onClick={() => FetchMovies(searchMovie)}>Search</button>
+            </div>
+          </div>
         </div>
         <div className="movies__wrapper">
           <div className="movies">
@@ -74,7 +79,9 @@ export default function MovieSearch() {
                     <img src={movie.Poster} alt="" />
                     <h4>{movie.Year}</h4>
                     <h1 className="movie__title">{movie.Title}</h1>
-                    <h2>{movie.Type}</h2>
+                    <h2>
+                      {movie.Type.charAt(0).toUpperCase() + movie.Type.slice(1)}
+                    </h2>
                   </div>
                 </div>
               ))
