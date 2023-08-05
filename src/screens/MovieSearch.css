@@ -37,6 +37,9 @@
     display: flex;
     align-items: center;
 }
+.search__input > button{
+    background-color: #e50914;
+}
 .movie__wrapper{
     display: flex;
     flex-basis: 23%;

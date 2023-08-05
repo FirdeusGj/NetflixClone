@@ -11,25 +11,24 @@ export default function MovieSearch() {
   const [loading, setLoading] = useState(false);
   const [searchMovie, setSearchMovie] = useState("");
   const [moviesAvailable, setMoviesAvailable] = useState(true);
+  let fetchedMovies = []
   async function FetchMovies(query) {
     setLoading(true);
-    const { data } = await axios
-      .get(
-        `https://www.omdbapi.com/?apikey=59e995b1&s=${
-          searchMovie || query
-        }&page=1`
-      )
-      .catch((error) => console.log(error));
-    if (data.Search) {
-      const filteredMovies = data.Search.filter(
-        (movie) => movie.Type !== "game" && movie.Poster !== "N/A"
-      );
-      setMovies(filteredMovies);
-      setMoviesAvailable(true);
-    } else {
-      setMoviesAvailable(false);
-      setMovies([]);
-    }
+    for(let i = 0; i <= 6; i++){
+      const { data } = await axios.get(`https://www.omdbapi.com/?apikey=59e995b1&s=${searchMovie || query}&page=${i}`).catch((error) => console.log(error));
+      if (data.Search) {
+        const filteredMovies = data.Search.filter(
+          (movie) => movie.Type !== "game" && movie.Poster !== "N/A"
+          );
+          fetchedMovies.push(...filteredMovies)
+          console.log(fetchedMovies)
+          setMovies(fetchedMovies);
+          setMoviesAvailable(true);
+        } else {
+          setMoviesAvailable(false);
+          setMovies([]);
+        }
+      }
     setLoading(false);
   }
   useEffect(() => {
@@ -44,7 +43,6 @@ export default function MovieSearch() {
       FetchMovies();
     }
   };
-  // #e50914
   return (
     <>
       <Nav />
@@ -70,7 +68,7 @@ export default function MovieSearch() {
             ) : loading ? (
               <h1> Loading...</h1>
             ) : (
-              movies.slice(0, 9).map((movie) => (
+              movies.map((movie) => (
                 <div className="movie__wrapper">
                   <div className="movie">
                     <img src={movie.Poster} alt="" />
