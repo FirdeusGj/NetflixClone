@@ -1,5 +1,10 @@
+.movieSearch{
+    background-color: black;
+    min-height: 100vh;
+    height: 100%;
+}
 .search__notFound{
-    height: 400px;
+    color:white;
 }
 .movie > h1,
 .movie > h2,
@@ -65,7 +70,7 @@
 }
 .movie__wrapper{
     display: flex;
-    flex-basis: 23%;
+    flex-basis: 27%;
     align-items: center;
     justify-content: center;
     border-radius: 5px;
@@ -82,9 +87,37 @@
     padding: 100px;
     flex-direction: column;
 }
+.search__form{
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .search__form > input{
-    font-size: 1.1rem;
+    font-size: 1rem;
+    border: none;
+    width: 80%;
+    padding: 12px 15px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.search__form > input:focus{
+    outline: none;
 }
 .search__form > button{
-
+    padding: 11px;
+    font-size: 1rem;
+    width: 20%;
+    border: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.search__form > button > svg{
+    fill:white;
+}
+.search__pages{
+    display: flex;
+}
+.search__pages > h1{
+    color:white;
 }
