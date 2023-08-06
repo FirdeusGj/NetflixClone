@@ -10,35 +10,42 @@ export default function MovieSearch() {
   const [loading, setLoading] = useState(false);
   const [searchMovie, setSearchMovie] = useState("");
   const [moviesAvailable, setMoviesAvailable] = useState(true);
-  const [pageNumber, setPageNumber] = useState(1);
-  let fetchedMovies = [];
 
+  let loopNumber = 1;
+  let fetchedMovies = [];
   async function FetchMovies(query) {
-    if (searchMovie === "") {
-      alert("Type something");
-      return;
+    for (let i = 0; i <= loopNumber; i++) {
+      if (searchMovie === "") {
+        alert("Type something");
+        return;
+      }
+      setLoading(true);
+      const { data } = await axios
+        .get(
+          `https://www.omdbapi.com/?apikey=59e995b1&s=${
+            searchMovie || query
+          }&page=${i}`
+        )
+        .catch((error) => console.log(error));
+      if (data.Search) {
+        const filteredMovies = data.Search.filter(
+          (movie) => movie.Type !== "game" && movie.Poster !== "N/A"
+        );
+        loopNumber = Math.round(data.totalResults / 10);
+        if (loopNumber === 0) {
+          loopNumber += 1;
+        }
+        console.log(loopNumber);
+        fetchedMovies.push(...filteredMovies);
+        console.log(fetchedMovies);
+        setMovies(fetchedMovies);
+        setMoviesAvailable(true);
+      } else {
+        setMoviesAvailable(false);
+        setMovies([]);
+      }
+      setLoading(false);
     }
-    setLoading(true);
-    const { data } = await axios
-      .get(
-        `https://www.omdbapi.com/?apikey=59e995b1&s=${
-          searchMovie || query
-        }&page=${pageNumber}`
-      )
-      .catch((error) => console.log(error));
-    if (data.Search) {
-      const filteredMovies = data.Search.filter(
-        (movie) => movie.Type !== "game" && movie.Poster !== "N/A"
-      );
-      fetchedMovies.push(...filteredMovies);
-      console.log(fetchedMovies);
-      setMovies(fetchedMovies);
-      setMoviesAvailable(true);
-    } else {
-      setMoviesAvailable(false);
-      setMovies([]);
-    }
-    setLoading(false);
   }
   useEffect(() => {
     if (state && state.query) {
@@ -52,19 +59,6 @@ export default function MovieSearch() {
       FetchMovies();
     }
   };
-  const pageIncrease = () => {
-    setPageNumber(pageNumber + 1)
-    FetchMovies()
-  }
-  const pageDecrease = () => {
-    if(pageNumber === 1){
-      return
-    }
-    else{
-      setPageNumber(pageNumber - 1)
-      FetchMovies()
-    }
-  }
   return (
     <>
       <Nav />
@@ -101,7 +95,7 @@ export default function MovieSearch() {
             ) : loading ? (
               <h1> Loading...</h1>
             ) : (
-              movies.slice(0, 9).map((movie) => (
+              movies.map((movie) => (
                 <div className="movie__wrapper">
                   <div className="movie">
                     <img src={movie.Poster} alt="" />
@@ -117,7 +111,7 @@ export default function MovieSearch() {
           </div>
         </div>
         <div className="search__pages">
-          <button onClick={pageDecrease}>
+          {/* <button onClick={pageDecrease}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="1em"
@@ -126,9 +120,7 @@ export default function MovieSearch() {
               <path d="M9.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l128-128c9.2-9.2 22.9-11.9 34.9-6.9s19.8 16.6 19.8 29.6l0 256c0 12.9-7.8 24.6-19.8 29.6s-25.7 2.2-34.9-6.9l-128-128z" />
             </svg>
           </button>
-          <h1>
-          {pageNumber}
-          </h1>
+          <h1>{pageNumber - 1}</h1>
           <button onClick={pageIncrease}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +129,7 @@ export default function MovieSearch() {
             >
               <path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z" />
             </svg>
-          </button>
+          </button> */}
         </div>
       </section>
     </>

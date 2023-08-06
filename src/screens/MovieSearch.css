@@ -70,7 +70,7 @@
 }
 .movie__wrapper{
     display: flex;
-    flex-basis: 27%;
+    flex-basis: 22%;
     align-items: center;
     justify-content: center;
     border-radius: 5px;
