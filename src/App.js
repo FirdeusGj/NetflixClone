@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginScreen from "./screens/LoginScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import MovieSearch from "./screens/MovieSearch";
+import MovieInfo from "./screens/MovieInfo";
 
 function App() {
   const [user, setUser] = useState(false);
@@ -18,6 +19,7 @@ function App() {
             <Route path="/profile" element={<ProfileScreen setUser={setUser}/>}/>
             <Route path="/" element={<HomeScreen />} />
             <Route path="/search" element={<MovieSearch/>}/>
+            <Route path="/search/:id" element={<MovieInfo/>} />
           </Routes>
         )}
       </Router>
