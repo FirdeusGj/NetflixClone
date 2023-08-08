@@ -17,7 +17,7 @@ export default function MovieInfo() {
       setMovie(data);
     };
     fetchMovie();
-  }, []);
+  }, [id]);
   const fetchSimilarMovies = async (name) => {
     const { data } = await axios.get(
       `https://www.omdbapi.com/?apikey=59e995b1&s=${name}`
@@ -53,8 +53,9 @@ export default function MovieInfo() {
           .slice(0, 4)
           .map((recommend) => (
             <Link
-              to={`/search/${similarMovies.imdbID}`}
-              state={{ title: similarMovies.title || state.query }}
+              to={`/search/${recommend.imdbID}`}
+              state={{ title: recommend.title || state.query }}
+              key={recommend.imdbID}
             >
               <div className="similar__movies" key={recommend.imdbID}>
                 <img src={recommend.Poster} alt="" className="similar__img" />
