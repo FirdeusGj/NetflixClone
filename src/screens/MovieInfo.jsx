@@ -33,6 +33,9 @@ export default function MovieInfo() {
   const watchMovie = () => {
     alert("This feature is not implemented yet");
   };
+  let filteredMovies = similarMovies
+    .filter((elem) => elem.imdbID !== id)
+    .slice(0, 4);
   return (
     <>
       <Nav />
@@ -88,29 +91,32 @@ export default function MovieInfo() {
           </div>
         </div>
         <div className="movieInfo__similar">
-          <h1>Similar movies</h1>
+          <h1>Similar shows</h1>
           <div className="similar__wrapper">
-            {similarMovies
-              .filter((elem) => elem.imdbID !== id)
-              .slice(0, 4)
-              .map((recommend) => (
-                <>
-                  <div className="similar__movies" key={recommend.imdbID}>
-                    <Link
+            {filteredMovies.map((recommend) => (
+              <>
+                <div className="similar__movies" key={recommend.imdbID}>
+                  <Link
                     className="similar__link"
-                      to={`/search/${recommend.imdbID}`}
-                      state={{ title: recommend.title || state.query }}
-                      key={recommend.imdbID}
-                    >
-                      <img
-                        src={recommend.Poster}
-                        alt=""
-                        className="similar__img"
-                      />
-                    </Link>
-                  </div>
-                </>
-              ))}
+                    to={`/search/${recommend.imdbID}`}
+                    state={{ title: recommend.title || state.query }}
+                    key={recommend.imdbID}
+                  >
+                    <img
+                      src={recommend.Poster}
+                      alt=""
+                      className="similar__img"
+                    />
+                    <h4>{recommend.Year}</h4>
+                    <h1 className="similar__title">{recommend.Title}</h1>
+                    <h2>
+                      {recommend.Type.charAt(0).toUpperCase() +
+                        recommend.Type.slice(1)}
+                    </h2>
+                  </Link>
+                </div>
+              </>
+            ))}
           </div>
         </div>
       </div>

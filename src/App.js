@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="app">
       <Router>
-        {user ? (
+        {!user ? (
           <LoginScreen setUser={setUser}/>
         ) : (
           <Routes>

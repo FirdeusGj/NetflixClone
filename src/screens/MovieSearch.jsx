@@ -13,7 +13,7 @@ export default function MovieSearch() {
 
   let loopNumber = 1;
   let fetchedMovies = [];
-  async function FetchMovies(query) {
+  async function FetchMovies() {
     for (let i = 0; i <= loopNumber ; i++) {
       if (searchMovie === "") {
         alert("Type something");
@@ -23,7 +23,7 @@ export default function MovieSearch() {
       var { data } = await axios
         .get(
           `https://www.omdbapi.com/?apikey=59e995b1&s=${
-            searchMovie || query
+            searchMovie
           }&page=${i}`
         )
         .catch((error) => console.log(error));
@@ -38,9 +38,7 @@ export default function MovieSearch() {
         else if(loopNumber >= 10){
           loopNumber = 10
         }
-        console.log(loopNumber);
         fetchedMovies.push(...filteredMovies);
-        console.log(fetchedMovies);
         setMovies(fetchedMovies);
         setMoviesAvailable(true);
       } else {
@@ -52,12 +50,6 @@ export default function MovieSearch() {
       setMoviesAvailable(false);
     }
   }
-  useEffect(() => {
-    if (state && state.query) {
-      FetchMovies(state.query);
-    }
-    // eslint-disable-next-line
-  }, []);
 
   const searchEnter = (e) => {
     if (e.key === "Enter") {
@@ -98,11 +90,15 @@ export default function MovieSearch() {
                 Sorry, we could not find the results you are looking for.
               </h1>
             ) : loading ? (
-              <h1> Loading...</h1>
+              movies.map((elem) => (
+                <div className="loading__wrapper">
+                  <div className="loading"></div>
+                </div>
+              ))
             ) : (
               movies.map((movie) => (
                 <div className="movie__wrapper">
-                  <Link to={`/search/${movie.imdbID}`} state={{title: searchMovie || state.query}}>
+                  <Link to={`/search/${movie.imdbID}`} state={{title: searchMovie}}>
                   <div className="movie">
                     <img src={movie.Poster} alt="" />
                     <h4>{movie.Year}</h4>
