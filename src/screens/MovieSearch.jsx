@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./MovieSearch.css";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import Nav from "../Nav";
 export default function MovieSearch() {
+  // eslint-disable-next-line
   const { state } = useLocation();
   const [movies, setMovies] = useState([]);
-  // eslint-disable-next-line
   const [loading, setLoading] = useState(false);
   const [searchMovie, setSearchMovie] = useState("");
   const [moviesAvailable, setMoviesAvailable] = useState(true);
@@ -14,7 +14,7 @@ export default function MovieSearch() {
   let loopNumber = 1;
   let fetchedMovies = [];
   async function FetchMovies() {
-    for (let i = 0; i <= loopNumber ; i++) {
+    for (let i = 0; i <= loopNumber; i++) {
       if (searchMovie === "") {
         alert("Type something");
         return;
@@ -22,9 +22,7 @@ export default function MovieSearch() {
       setLoading(true);
       var { data } = await axios
         .get(
-          `https://www.omdbapi.com/?apikey=59e995b1&s=${
-            searchMovie
-          }&page=${i}`
+          `https://www.omdbapi.com/?apikey=59e995b1&s=${searchMovie}&page=${i}`
         )
         .catch((error) => console.log(error));
       if (data.Search) {
@@ -34,9 +32,8 @@ export default function MovieSearch() {
         loopNumber = Math.round(data.totalResults / 10);
         if (loopNumber === 0) {
           loopNumber += 1;
-        }
-        else if(loopNumber >= 10){
-          loopNumber = 10
+        } else if (loopNumber >= 10) {
+          loopNumber = 10;
         }
         fetchedMovies.push(...filteredMovies);
         setMovies(fetchedMovies);
@@ -46,7 +43,7 @@ export default function MovieSearch() {
       }
       setLoading(false);
     }
-    if(!data.Search){
+    if (!data.Search) {
       setMoviesAvailable(false);
     }
   }
@@ -98,15 +95,19 @@ export default function MovieSearch() {
             ) : (
               movies.map((movie) => (
                 <div className="movie__wrapper">
-                  <Link to={`/search/${movie.imdbID}`} state={{title: searchMovie}}>
-                  <div className="movie">
-                    <img src={movie.Poster} alt="" />
-                    <h4>{movie.Year}</h4>
-                    <h1 className="movie__title">{movie.Title}</h1>
-                    <h2>
-                      {movie.Type.charAt(0).toUpperCase() + movie.Type.slice(1)}
-                    </h2>
-                  </div>
+                  <Link
+                    to={`/search/${movie.imdbID}`}
+                    state={{ title: searchMovie }}
+                  >
+                    <div className="movie">
+                      <img src={movie.Poster} alt="" />
+                      <h4>{movie.Year}</h4>
+                      <h1 className="movie__title">{movie.Title}</h1>
+                      <h2>
+                        {movie.Type.charAt(0).toUpperCase() +
+                          movie.Type.slice(1)}
+                      </h2>
+                    </div>
                   </Link>
                 </div>
               ))

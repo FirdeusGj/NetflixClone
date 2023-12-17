@@ -7,9 +7,9 @@ export default function LoginScreen({ setUser }) {
   const [signIn, setSignIn] = useState(false);
   const [signUp, setSignUp] = useState(false);
   const homeScreen = () => {
-    setSignIn(false)
-    setSignUp(false)
-  }
+    setSignIn(false);
+    setSignUp(false);
+  };
   return (
     <div className="loginScreen">
       <div className="loginScreen__background">
@@ -27,8 +27,18 @@ export default function LoginScreen({ setUser }) {
       </div>
       <div className="loginScreen__body">
         {signIn ? (
-          <SignupScreen setUser={setUser} setSignIn={setSignIn} setSignUp={setSignUp} />
-        ) : signUp ? <Register setUser={setUser} setSignIn={setSignIn} setSignUp={setSignUp}/> : (
+          <SignupScreen
+            setUser={setUser}
+            setSignIn={setSignIn}
+            setSignUp={setSignUp}
+          />
+        ) : signUp ? (
+          <Register
+            setUser={setUser}
+            setSignIn={setSignIn}
+            setSignUp={setSignUp}
+          />
+        ) : (
           <>
             <h1>Unlimited films, TV programmes and more.</h1>
             <h2>Watch anywhere. Cancel at any time.</h2>
@@ -38,7 +48,12 @@ export default function LoginScreen({ setUser }) {
             </h3>
             <div className="loginScreen__input">
               <form>
-                <button onClick={() => setSignUp(true)} className="loginScreen__getStarted">GET STARTED</button>
+                <button
+                  onClick={() => setSignUp(true)}
+                  className="loginScreen__getStarted"
+                >
+                  GET STARTED
+                </button>
               </form>
             </div>
           </>
