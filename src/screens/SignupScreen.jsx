@@ -1,21 +1,9 @@
 import React, { useState } from "react";
 import "./SignupScreen.css";
-import { accountData } from "../AccountData";
-import { profile } from "../ProfileData";
-export default function SignupScreen({
-  setUser,
-  setSignUp,
-  setSignIn,
-  
-}) {
+import { auth } from "../firebase";
+export default function SignupScreen({ setUser, setSignUp, setSignIn }) {
   const [inputChange, setInputchange] = useState("");
   const [inputChangePass, setInputchangePass] = useState("");
-  const emails = accountData.map((elem) => elem[0]);
-  const fetchedEmails = emails.map((elem) => elem.email);
-  const passwords = accountData.map((elem) => elem[0]);
-  const fetchedPasswords = passwords.map((elem) => elem.password)
-  let emailFound = false;
-  let passwordFound = false;
   const register = (e) => {
     e.preventDefault();
     setSignUp(true);
@@ -27,25 +15,13 @@ export default function SignupScreen({
   const setInputChangePassFunction = (event) => {
     setInputchangePass(event.target.value);
   };
-  const signIn = (e) => {
+  const signIn = async (e) => {
     e.preventDefault();
-    for(let i = 0; i < fetchedEmails.length; i++){
-      if(fetchedEmails[i] === inputChange){
-        emailFound = true;
-        break;
-      }
-    }
-    for(let i = 0; i< fetchedPasswords.length; i++){
-      if(fetchedPasswords[i] === inputChangePass){
-        passwordFound = true;
-        break;
-      }
-    }
-    if (emailFound && passwordFound) {
-      profile.push(inputChange)
+    try {
+      await auth.signInWithEmailAndPassword(inputChange, inputChangePass);
       setUser(true);
-    } else {
-      alert("invalid password or email");
+    } catch (error) {
+      alert("Invalid password or email");
     }
   };
   return (

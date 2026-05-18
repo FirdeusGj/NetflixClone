@@ -1,46 +1,41 @@
 import React, { useState } from "react";
 import "./Register.css";
-import { accountData } from "../AccountData";
-import { profile } from "../ProfileData";
+import db, { auth } from "../firebase";
 export default function Register({ setUser, setSignIn, setSignUp }) {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const passwordWrong = document.querySelector(".registerPass");
-  const passwordConfirmWrong = document.querySelector(".registerPassConfirm");
-  const registeredAccounts = accountData
-    .map((elem) => elem[0])
-    .map((elem) => elem.email);
-  let exists = false;
-  const registerData = [
-    {
-      id: accountData.length,
-      name: name,
-      lastName: lastName,
-      email: email,
-      password: password,
-      confirmPassword: confirmPassword,
-    },
-  ];
-  const registerForm = (e) => {
+
+  const registerForm = async (e) => {
     e.preventDefault();
-    for (let i = 0; i < registeredAccounts.length; i++) {
-      if (registeredAccounts[i] === email) {
-        exists = true;
-        break;
-      }
+    if (password !== confirmPassword) {
+      document.querySelector(".registerPass").style.boxShadow =
+        "0 0 3px 2px #ff4545";
+      document.querySelector(".registerPassConfirm").style.boxShadow =
+        "0 0 3px 2px #ff4545";
+      return;
     }
-    if (exists) {
-      alert("Email is already in use!");
-    } else if (password !== confirmPassword) {
-      passwordWrong.style.boxShadow = "0 0 3px 2px #ff4545";
-      passwordConfirmWrong.style.boxShadow = "0 0 3px 2px #ff4545";
-    } else {
-      profile.push(email);
+    try {
+      const userCredential = await auth.createUserWithEmailAndPassword(
+        email,
+        password,
+      );
+      const uid = userCredential.user.uid;
+      await db.collection("users").doc(uid).set({
+        name,
+        lastName,
+        email,
+        password,
+      });
       setUser(true);
-      accountData.push(registerData);
+    } catch (error) {
+      if (error.code === "auth/email-already-in-use") {
+        alert("Email is already in use!");
+      } else {
+        alert(error.message);
+      }
     }
   };
   const alreadyHave = () => {
